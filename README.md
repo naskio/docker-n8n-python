@@ -5,6 +5,7 @@ Docker Compose configuration file for n8n with Python, ready to use
 ## prerequisites
 
 - [Postgres](https://hub.docker.com/r/postgres/)
+- jwilder/nginx-proxy
 
 ## Step-by-step instructions
 
