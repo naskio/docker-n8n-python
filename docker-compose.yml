@@ -1,0 +1,51 @@
+version: "3.8"
+
+services:
+  # n8n:
+  n8n-python:
+    #    image: n8nio/n8n
+    #    image: n8n-python # with running: docker build -t n8n-python .
+    build:
+      context: ./
+    #    command: /bin/sh -c "sleep 5; n8n start" # Wait 5 seconds to start n8n to make sure that PostgreSQL is ready
+    restart: always
+    container_name: n8n-python
+    #    container_name: n8n
+    expose:
+      - 5678
+    environment:
+      NODE_ENV: production
+      N8N_BASIC_AUTH_ACTIVE: true
+      N8N_BASIC_AUTH_USER: ${N8N_BASIC_AUTH_USER}
+      N8N_BASIC_AUTH_PASSWORD: ${N8N_BASIC_AUTH_PASSWORD}
+      N8N_HOST: ${VIRTUAL_HOST}
+      WEBHOOK_URL: https://${VIRTUAL_HOST}/
+      N8N_PORT: 5678
+      N8N_PROTOCOL: https
+      GENERIC_TIMEZONE: ${TIMEZONE}
+      TZ: ${TIMEZONE}
+      VIRTUAL_PORT: 5678
+      VIRTUAL_HOST: ${VIRTUAL_HOST}
+      LETSENCRYPT_HOST: ${VIRTUAL_HOST}
+      LETSENCRYPT_EMAIL: ${WEBMASTER_EMAIL}
+      DB_TYPE: postgresdb
+      DB_POSTGRESDB_HOST: postgres
+      DB_POSTGRESDB_PORT: 5432
+      DB_POSTGRESDB_DATABASE: ${POSTGRES_DB}
+      DB_POSTGRESDB_USER: ${POSTGRES_USER}
+      DB_POSTGRESDB_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - data:/home/node/.n8n
+      - ./python_scripts:/py_scripts
+    networks:
+      - auto-reverse-proxy-global-network
+      - postgres_service-network
+
+volumes:
+  data:
+
+networks:
+  auto-reverse-proxy-global-network:
+    external: true
+  postgres_service-network:
+    external: true
