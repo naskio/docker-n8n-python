@@ -11,6 +11,12 @@ Docker Compose configuration file for n8n with Python, ready to use
 
 - Configure `.env` file
 - Run `docker-compose up -d`
+- In order to run python scripts inside n8n
+  ```shell
+  cd /py_scripts
+  cd /files
+  cat /requirements/requirements.txt
+  ```
 
 ## Further information
 
