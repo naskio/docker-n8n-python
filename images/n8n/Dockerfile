@@ -1,4 +1,4 @@
-FROM python3.10-nodejs14-alpine
+FROM nikolaik/python-nodejs:python3.10-nodejs14-alpine
 
 ARG N8N_VERSION
 
