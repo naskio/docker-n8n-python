@@ -126,3 +126,4 @@ ENV/
 .cache/
 node_modules/
 *.tmp.*
+n8n_data/
