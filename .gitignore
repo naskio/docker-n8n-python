@@ -178,3 +178,4 @@ Temporary Items
 # Others
 *.tmp.*
 *.tmp
+n8n_data/
