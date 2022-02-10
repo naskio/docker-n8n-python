@@ -1,5 +1,9 @@
 FROM nikolaik/python-nodejs:python3.10-nodejs14
 
+# changing user `pn` to `node`
+RUN usermod --login node --move-home --home /home/node pn
+RUN groupmod --new-name node pn
+
 ARG N8N_VERSION
 
 RUN if [ -z "$N8N_VERSION" ] ; then echo "The N8N_VERSION argument is missing!" ; exit 1; fi

@@ -15,7 +15,3 @@ Additional information and example workflows on the n8n.io website: [https://n8n
 ## Usage
 
 Learn [how to run n8n in **Docker**](https://github.com/n8n-io/n8n/tree/master/docker/images/n8n/README.md)
-
-## Volumes
-
-> use `/home/pn/.n8n` instead of `/home/node/.n8n` because the user for `python-nodejs` is `pn` instead of `node` 

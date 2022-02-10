@@ -32,7 +32,7 @@ services:
       DB_POSTGRESDB_USER: ${POSTGRES_USER}
       DB_POSTGRESDB_PASSWORD: ${POSTGRES_PASSWORD}
     volumes:
-      - data:/home/pn/.n8n
+      - data:/home/node/.n8n
       - ./local-files:/files
       - ./python_scripts:/py_scripts
       - ./requirements.txt:/requirements/requirements.txt
