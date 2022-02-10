@@ -52,12 +52,20 @@ jobs:
           tags: |
             ${{ secrets.DOCKER_USERNAME }}/n8n-python:${{ steps.vars.outputs.tag }}-debian
             ${{ secrets.DOCKER_USERNAME }}/n8n-python:latest-debian
-      - name: Create Release
+      - name: Docker Hub Description (README.md)
+        uses: peter-evans/dockerhub-description@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_USERNAME }}
+          repository: naskio/n8n-python
+          readme-filepath: README.md
+      - name: Create Release in GitHub
         id: create_release
         uses: actions/create-release@v1
+        continue-on-error: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
         with:
-          #          tag_name: ${{ github.ref }}
+          tag_name: v${{steps.vars.outputs.tag}}
           release_name: Release ${{steps.vars.outputs.tag}}
-          body: n8n v${{steps.vars.outputs.tag}} with python3
+          body: n8n v${{steps.vars.outputs.tag}} (python3 included)
