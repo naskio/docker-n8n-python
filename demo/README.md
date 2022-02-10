@@ -2,6 +2,14 @@
 
 Docker Compose configuration file for n8n with Python, ready to use
 
+## Demo
+
+```
+docker-compose -f docker-compose-local.yml up
+docker-compose -f docker-compose-local.yml up -d
+docker-compose -f docker-compose-local.yml down
+```
+
 ## prerequisites
 
 - [Postgres](https://hub.docker.com/r/postgres/)
