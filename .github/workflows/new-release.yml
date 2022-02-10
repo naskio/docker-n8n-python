@@ -8,8 +8,8 @@
 
 name: Check new release
 on:
-  schedule:
-    - cron: '0 0 * * *'
+  schedule: # every 1 hour
+    - cron: '0 */1 * * *'
 jobs:
   get-version:
     runs-on: ubuntu-latest
