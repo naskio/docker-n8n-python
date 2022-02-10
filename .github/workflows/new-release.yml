@@ -2,14 +2,13 @@
 # ENV VARS:
 # - FULL_NAME
 # - EMAIL
-# - GITHUB_TOKEN (by default)
-# - REPO_SCOPED_TOKEN (by default?)
+# - REPO_SCOPED_TOKEN (by default)
 ###################
 
 name: Check new release
 on:
-  schedule: # every 1 hour
-    - cron: '0 */1 * * *'
+  schedule:
+    - cron: "0 */1 * * *"
 jobs:
   get-version:
     runs-on: ubuntu-latest
@@ -17,7 +16,6 @@ jobs:
       - uses: actions/checkout@v2
         with:
           token: ${{ secrets.REPO_SCOPED_TOKEN }}
-      #          token: ${{ secrets.GITHUB_TOKEN }}
       - name: Fetch release version
         run: |
           curl -sL https://api.npms.io/v2/package/n8n | jq -r ".collected.metadata.version" > release-versions/n8n-latest.txt

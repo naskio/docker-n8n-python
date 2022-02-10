@@ -2,16 +2,16 @@
 
 if [ -d /root/.n8n ] ; then
   chmod o+rx /root
-  chown -R node /root/.n8n
-  ln -s /root/.n8n /home/node/
+  chown -R pn /root/.n8n
+  ln -s /root/.n8n /home/pn/
 fi
 
-chown -R node /home/node
+chown -R pn /home/pn
 
 if [ "$#" -gt 0 ]; then
   # Got started with arguments
-  exec su-exec node "$@"
+  exec su-exec pn "$@"
 else
   # Got started without arguments
-  exec su-exec node n8n
+  exec su-exec pn n8n
 fi
