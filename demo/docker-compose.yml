@@ -1,17 +1,11 @@
 version: "3.8"
 
 services:
-  # n8n:
   n8n-python:
-    #    image: n8nio/n8n
-    #    image: n8n-python # with running: docker build -t n8n-python .
-    image: rrrlobert/n8n-debian #n8n with python 3.9
-    #    build:
-    #      context: ./
+    image: naskio/n8n-python
     #    command: /bin/sh -c "sleep 5; n8n start" # Wait 5 seconds to start n8n to make sure that PostgreSQL is ready
     restart: always
     container_name: n8n-python
-    #    container_name: n8n
     expose:
       - 5678
     environment:

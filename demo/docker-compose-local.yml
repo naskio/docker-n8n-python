@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  n8n-python:
+    image: naskio/n8n-python
+    #    command: /bin/sh -c "n8n start"
+    restart: always
+    container_name: n8n-python
+    environment:
+      GENERIC_TIMEZONE: ${TIMEZONE}
+      TZ: ${TIMEZONE}
+    ports:
+      - "5678:5678"
+    volumes:
+      - ./n8n_data:/home/node/.n8n
+      - ./local-files:/files
+      - ./python_scripts:/py_scripts
+      - ./requirements.txt:/requirements/requirements.txt
