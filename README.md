@@ -2,7 +2,7 @@
 
 ![n8n.io - Workflow Automation](https://raw.githubusercontent.com/n8n-io/n8n/master/assets/n8n-logo.png)
 
-> Run python 3.10 on n8n.
+> Run python 3.10 code on n8n.
 
 [Docker Hub](https://hub.docker.com/r/naskio/n8n-python)
 
