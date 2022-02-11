@@ -17,8 +17,10 @@ jobs:
         with:
           token: ${{ secrets.PAT }}
       - name: Fetch release version
+        id: fetch-version
         run: |
           curl -sL https://api.npms.io/v2/package/n8n | jq -r ".collected.metadata.version" > release-versions/n8n-latest.txt
+          run: echo ::set-output name=version::$(cat release-versions/n8n-latest.txt)
 
       #      - name: Check for modified files
       #        id: git-check
@@ -33,4 +35,4 @@ jobs:
 
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit_message: "New release: $(cat release-versions/n8n-latest.txt)"
+          commit_message: New release v${{steps.fetch-version.outputs.version}}
