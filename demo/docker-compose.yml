@@ -33,9 +33,9 @@ services:
       DB_POSTGRESDB_PASSWORD: ${POSTGRES_PASSWORD}
     volumes:
       - data:/home/node/.n8n
-      - ./local-files:/files
-      - ./python_scripts:/py_scripts
-      - ./requirements.txt:/requirements/requirements.txt
+      - ./local-files:/data/files
+      - ./python_scripts:/data/py_scripts
+      - ./requirements.txt:/data/requirements.txt
     networks:
       - auto-reverse-proxy-global-network
       - postgres_service-network
