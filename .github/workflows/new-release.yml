@@ -20,7 +20,7 @@ jobs:
         id: fetch-version
         run: |
           curl -sL https://api.npms.io/v2/package/n8n | jq -r ".collected.metadata.version" > release-versions/n8n-latest.txt
-          run: echo ::set-output name=version::$(cat release-versions/n8n-latest.txt)
+          echo ::set-output name=version::$(cat release-versions/n8n-latest.txt)
 
       #      - name: Check for modified files
       #        id: git-check
