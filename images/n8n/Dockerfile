@@ -32,8 +32,8 @@ RUN apk --no-cache add --virtual fonts msttcorefonts-installer fontconfig && \
 # Install python requirements
 RUN mkdir /requirements
 COPY requirements.txt /requirements/requirements.txt
-RUN python3 -m pip install --upgrade pip setuptools wheel
-RUN python3 -m pip install -r /requirements/requirements.txt
+RUN python -m pip install --upgrade pip setuptools wheel
+RUN pip install -r /requirements/requirements.txt
 
 ENV NODE_ICU_DATA /usr/local/lib/node_modules/full-icu
 
