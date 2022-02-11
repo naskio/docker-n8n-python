@@ -2,7 +2,8 @@
 # ENV VARS:
 # - FULL_NAME
 # - EMAIL
-# - GITHUB_TOKEN (by default)
+# - REPO_SCOPED_TOKEN (generated at Personal Access Tokens)
+# + GITHUB_TOKEN
 ###################
 
 name: Check new release
@@ -15,8 +16,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-      #          token: ${{ secrets.REPO_SCOPED_TOKEN }}
+          token: ${{ secrets.REPO_SCOPED_TOKEN }}
+      #          token: ${{ secrets.GITHUB_TOKEN }}
       - name: Fetch release version
         run: |
           curl -sL https://api.npms.io/v2/package/n8n | jq -r ".collected.metadata.version" > release-versions/n8n-latest.txt
