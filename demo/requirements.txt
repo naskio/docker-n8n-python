@@ -4,3 +4,4 @@ instaloader==4.8.2
 instapy==0.6.15
 pymongo==4.0.1
 mongoengine==0.23.1
+naskpy

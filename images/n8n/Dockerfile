@@ -29,6 +29,12 @@ RUN apk --no-cache add --virtual fonts msttcorefonts-installer fontconfig && \
 	find  /usr/share/fonts/truetype/msttcorefonts/ -type l -exec unlink {} \; \
 	&& rm -rf /root /tmp/* /var/cache/apk/* && mkdir /root
 
+# Install python requirements
+RUN mkdir /requirements
+COPY ../../default-requirements.txt /requirements/requirements.txt
+RUN python -m pip install --upgrade pip setuptools wheel
+RUN pip install -r /requirements/requirements.txt
+
 ENV NODE_ICU_DATA /usr/local/lib/node_modules/full-icu
 
 WORKDIR /data
