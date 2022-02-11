@@ -13,7 +13,7 @@ RUN \
 	apt-get -y install graphicsmagick gosu git
 
 # Install n8n-nodes-python module
-RUN cd /usr/local/lib/node_modules/n8n && npm install n8n-nodes-python
+RUN cd /usr/lib/node_modules/n8n && npm install n8n-nodes-python
 
 # Install python requirements
 RUN mkdir /requirements
