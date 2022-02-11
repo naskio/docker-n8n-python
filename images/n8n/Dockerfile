@@ -29,9 +29,13 @@ RUN apk --no-cache add --virtual fonts msttcorefonts-installer fontconfig && \
 	find  /usr/share/fonts/truetype/msttcorefonts/ -type l -exec unlink {} \; \
 	&& rm -rf /root /tmp/* /var/cache/apk/* && mkdir /root
 
-# Install Python Development Tools
-RUN apk update && apk --no-cache add make automake gcc g++ subversion python3-dev
-#RUN apk update && apk --no-cache add musl-dev linux-headers g++
+# (note: use debian instead of alpine if you want to use Pandas or heavy libraries)
+# Install Python Development Tools (disabled)
+# RUN apk update && apk --no-cache add make automake gcc g++ subversion python3-dev
+# RUN apk update && apk --no-cache add musl-dev linux-headers g++
+# RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories
+# RUN apk --no-cache --update-cache add gfortran build-base wget freetype-dev libpng-dev openblas-dev
+# RUN apk --no-cache --update-cache add wget libgfortran musl-dev linux-headers
 
 # Install python requirements
 RUN mkdir /requirements
