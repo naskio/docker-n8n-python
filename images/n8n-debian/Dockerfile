@@ -14,7 +14,7 @@ RUN \
 
 # Install python requirements
 RUN mkdir /requirements
-COPY ../../default-requirements.txt /requirements/requirements.txt
+COPY requirements.txt /requirements/requirements.txt
 RUN python -m pip install --upgrade pip setuptools wheel
 RUN pip install -r /requirements/requirements.txt
 
