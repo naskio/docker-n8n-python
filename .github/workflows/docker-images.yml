@@ -64,6 +64,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
           repository: naskio/n8n-python
           readme-filepath: README.md
+
       - name: Create Release in GitHub
         id: create_release
         uses: actions/create-release@v1
