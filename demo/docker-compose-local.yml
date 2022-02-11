@@ -13,6 +13,6 @@ services:
       - "5678:5678"
     volumes:
       - ./n8n_data:/home/node/.n8n
-      - ./local-files:/files
-      - ./python_scripts:/py_scripts
-      - ./requirements.txt:/requirements/requirements.txt
+      - ./local-files:/data/files # by default workdir == /data
+      - ./python_scripts:/data/py_scripts
+      - ./requirements.txt:/data/requirements.txt
