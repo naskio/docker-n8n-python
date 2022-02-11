@@ -1,8 +1,8 @@
 FROM nikolaik/python-nodejs:python3.10-nodejs14-alpine
 
 # changing user `pn` to `node`
-RUN usermod --login node --move-home --home /home/node pn
-RUN groupmod --new-name node pn
+RUN deluser pn && rm -r /home/pn # delete: user + group
+RUN addgroup -g 1000 -S node && adduser -u 1000 -S node -G node -s /bin/sh # create: user + group
 
 ARG N8N_VERSION
 
