@@ -29,6 +29,10 @@ RUN apk --no-cache add --virtual fonts msttcorefonts-installer fontconfig && \
 	find  /usr/share/fonts/truetype/msttcorefonts/ -type l -exec unlink {} \; \
 	&& rm -rf /root /tmp/* /var/cache/apk/* && mkdir /root
 
+# Install Python Development Tools
+RUN apk update && apk --no-cache add make automake gcc g++ subversion python3-dev
+#RUN apk update && apk --no-cache add musl-dev linux-headers g++
+
 # Install python requirements
 RUN mkdir /requirements
 COPY requirements.txt /requirements/requirements.txt
