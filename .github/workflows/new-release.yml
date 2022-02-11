@@ -3,7 +3,6 @@
 # - FULL_NAME
 # - EMAIL
 # - GITHUB_TOKEN (by default)
-# - REPO_SCOPED_TOKEN
 ###################
 
 name: Check new release

@@ -2,7 +2,7 @@
 # ENV VARS:
 # - DOCKER_USERNAME
 # - DOCKER_PASSWORD
-# - GITHUB_TOKEN (defaults)
+# - GITHUB_TOKEN (default)
 ###########
 
 name: Docker Image CI
