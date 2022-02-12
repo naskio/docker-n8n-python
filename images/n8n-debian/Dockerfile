@@ -10,10 +10,7 @@ RUN if [ -z "$N8N_VERSION" ] ; then echo "The N8N_VERSION argument is missing!" 
 
 RUN \
 	apt-get update && \
-	apt-get -y install graphicsmagick gosu git build-essential cmake # build-essential cmake for npm install n8n-nodes-python
-
-# Install n8n-nodes-python module
-RUN cd /usr/lib/node_modules/n8n && npm install n8n-nodes-python
+	apt-get -y install graphicsmagick gosu git # build-essential cmake # build-essential cmake for npm install n8n-nodes-python
 
 # Install python requirements
 RUN mkdir /requirements
@@ -25,6 +22,9 @@ RUN pip install -r /requirements/requirements.txt
 USER root
 
 RUN npm_config_user=root npm install -g full-icu n8n@${N8N_VERSION}
+
+# Install n8n-nodes-python module
+RUN cd /usr/lib/node_modules/n8n && npm install n8n-nodes-python
 
 ENV NODE_ICU_DATA /usr/lib/node_modules/full-icu
 
