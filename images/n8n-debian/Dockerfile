@@ -10,7 +10,7 @@ RUN if [ -z "$N8N_VERSION" ] ; then echo "The N8N_VERSION argument is missing!" 
 
 RUN \
 	apt-get update && \
-	apt-get -y install graphicsmagick gosu git # build-essential cmake # build-essential cmake for npm install n8n-nodes-python
+	apt-get -y install graphicsmagick gosu git
 
 # Install python requirements
 RUN mkdir /requirements
