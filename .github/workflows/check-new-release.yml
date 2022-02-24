@@ -1,14 +1,15 @@
 ###################
 # ENV VARS:
-# - FULL_NAME
-# - EMAIL
-# - PAT (generated at Personal Access Tokens)
+# # - FULL_NAME
+# # - EMAIL
+# - PAT (generated at Personal Access Tokens - with workflow access checked)
 ###################
 
 name: Check new release
 on:
   schedule:
-    - cron: "0 */1 * * *"
+    - cron: "0 0 */1 * *"
+
 jobs:
   get-version:
     runs-on: ubuntu-latest
@@ -35,4 +36,4 @@ jobs:
 
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit_message: New release v${{steps.fetch-version.outputs.version}}
+          commit_message: New auto release v${{steps.fetch-version.outputs.version}}
