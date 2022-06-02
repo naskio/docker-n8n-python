@@ -1,0 +1,40 @@
+###################
+# ENV VARS:
+# - PAT (generated at Personal Access Tokens - with workflow access checked)
+###################
+
+name: Create new release manually
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'version'
+        required: true
+        default: '0.179.0'
+        type: string
+
+jobs:
+  get-version:
+    runs-on: ubuntu-latest
+    steps:
+
+      - uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.PAT }}
+
+      ## if we prefer without an input
+      #      - name: Fetch release version
+      #        id: fetch-version
+      #        run: |
+      #          curl -sL https://raw.githubusercontent.com/n8n-io/n8n/master/package.json | jq -r ".version" > release-versions/n8n-latest.txt
+      #          echo ::set-output name=version::$(cat release-versions/n8n-latest.txt)
+
+      - name: Fetch release version
+        id: fetch-version
+        run: |
+          echo "${{ github.event.inputs.version }}" > release-versions/n8n-latest.txt
+
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: New manual release ${{ github.event.inputs.version }}
