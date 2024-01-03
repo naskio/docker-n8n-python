@@ -22,7 +22,7 @@ RUN apk --update add --virtual build-dependencies build-base ca-certificates && 
 	&& rm -rf /root /tmp/* /var/cache/apk/* && mkdir /root;
 
 # Install n8n-nodes-python module
-RUN mkdir -p /home/node/.n8n/nodes/ && cd /home/node/.n8n/nodes/ && npm install n8n-nodes-python
+RUN npm install n8n-nodes-python --prefix /home/node/custom/.n8n/nodes/ && mkdir /home/node/.n8n 
 
 # Install fonts
 RUN apk --no-cache add --virtual fonts msttcorefonts-installer fontconfig && \
