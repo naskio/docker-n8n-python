@@ -1,4 +1,4 @@
-FROM nikolaik/python-nodejs:python3.10-nodejs18-alpine
+FROM nikolaik/python-nodejs:python3.10-nodejs24-alpine
 
 # changing user `pn` to `node`
 RUN deluser pn && rm -r /home/pn # delete: user + group
