@@ -179,3 +179,4 @@ Temporary Items
 *.tmp.*
 *.tmp
 n8n_data/
+images/*/requirements.txt
