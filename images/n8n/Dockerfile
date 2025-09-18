@@ -21,8 +21,8 @@ RUN apk --update add --virtual build-dependencies build-base ca-certificates && 
 	apk del build-dependencies \
 	&& rm -rf /root /tmp/* /var/cache/apk/* && mkdir /root;
 
-# Install n8n-nodes-python module
-RUN cd /usr/local/lib/node_modules/n8n && npm install n8n-nodes-python
+# Install n8n-nodes-python module with legacy peer deps to resolve dependency conflicts
+RUN cd /usr/local/lib/node_modules/n8n && npm install n8n-nodes-python --legacy-peer-deps
 
 # Install fonts
 RUN apk --no-cache add --virtual fonts msttcorefonts-installer fontconfig && \
