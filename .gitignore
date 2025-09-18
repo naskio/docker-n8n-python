@@ -179,3 +179,7 @@ Temporary Items
 *.tmp.*
 *.tmp
 n8n_data/
+
+# act (GitHub Actions local runner) configuration
+.secrets
+.github/workflows/*-local-test.yml
