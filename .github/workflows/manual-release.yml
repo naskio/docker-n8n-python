@@ -26,7 +26,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          token: ${{ secrets.PAT }}
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Get latest stable N8N version from GitHub API
         id: get-latest
