@@ -24,7 +24,7 @@ USER root
 RUN npm_config_user=root npm install -g full-icu n8n@${N8N_VERSION}
 
 # Install n8n-nodes-python module
-RUN cd /usr/lib/node_modules/n8n && npm install n8n-nodes-python
+RUN npm install n8n-nodes-python --prefix /home/node/custom/.n8n/nodes/ && mkdir /home/node/.n8n
 
 ENV NODE_ICU_DATA /usr/lib/node_modules/full-icu
 

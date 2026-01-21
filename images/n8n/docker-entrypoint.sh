@@ -1,9 +1,9 @@
 #!/bin/sh
 
-if [ -d /root/.n8n ] ; then
-  chmod o+rx /root
-  chown -R node /root/.n8n
-  ln -s /root/.n8n /home/node/
+if [ -d /home/node/custom/.n8n/nodes/ ] ; then
+  chmod o+rx /home/node/custom
+  chown -R node /home/node/custom/.n8n/
+  ln -s /home/node/custom/.n8n/nodes/ /home/node/.n8n/
 fi
 
 chown -R node /home/node
