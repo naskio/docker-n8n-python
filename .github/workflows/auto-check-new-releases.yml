@@ -1,3 +1,5 @@
+# .github/workflows/auto-check-new-releases.yml
+
 ###################
 # ENV VARS:
 # # - FULL_NAME
@@ -6,8 +8,18 @@
 ###################
 
 name: Check for new releases
-# Automatically check for new releases (new versions)
 on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "N8N version (leave empty to use latest)"
+        required: false
+        type: string
+      use_latest:
+        description: "Use latest N8N version"
+        required: false
+        default: true
+        type: boolean
   schedule:
     - cron: "0 0 */1 * *"
 
@@ -17,24 +29,47 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          token: ${{ secrets.PAT }}
-      - name: Fetch release version
-        id: fetch-version
-        run: |
-          curl -sL https://raw.githubusercontent.com/n8n-io/n8n/master/package.json | jq -r ".version" > release-versions/n8n-latest.txt
-          echo ::set-output name=version::$(cat release-versions/n8n-latest.txt)
+          token: ${{ secrets.GITHUB_TOKEN }}
 
-      #      - name: Check for modified files
-      #        id: git-check
-      #        run: echo ::set-output name=modified::$([ -z "`git status --porcelain`" ] && echo "false" || echo "true")
-      #      - name: Commit latest release version
-      #        if: steps.git-check.outputs.modified == 'true'
-      #        run: |
-      #          git config --global user.name '${{ secrets.FULL_NAME }}'
-      #          git config --global user.email '${{ secrets.EMAIL }}'
-      #          git commit -am "New release: $(cat release-versions/n8n-latest.txt)"
-      #          git push
+      - name: Get latest stable N8N version from GitHub API
+        id: get-latest
+        run: |
+          # Fetch all releases and filter for stable versions only (not pre-release)
+          LATEST_VERSION=$(curl -s https://api.github.com/repos/n8n-io/n8n/releases | \
+            jq -r '.[] | select(.prerelease == false) | .tag_name' | \
+            head -1 | \
+            sed 's/^n8n@//')
+
+          if [ -z "$LATEST_VERSION" ]; then
+            echo "Error: Could not fetch latest stable version"
+            exit 1
+          fi
+
+          echo "latest_version=${LATEST_VERSION}" >> $GITHUB_OUTPUT
+          echo "Latest stable N8N version: ${LATEST_VERSION}"
+
+      - name: Determine version to use
+        id: determine-version
+        run: |
+          echo "Event name: ${{ github.event_name }}"
+          echo "Input use_latest: '${{ github.event.inputs.use_latest }}'"
+          echo "Input version: '${{ github.event.inputs.version }}'"
+
+          # For scheduled runs, inputs are not available, so default to latest
+          if [[ "${{ github.event_name }}" == "schedule" ]]; then
+            VERSION="${{ steps.get-latest.outputs.latest_version }}"
+            echo "Scheduled run - using latest version: ${VERSION}"
+          elif [[ "${{ github.event.inputs.use_latest }}" == "true" || -z "${{ github.event.inputs.version }}" ]]; then
+            VERSION="${{ steps.get-latest.outputs.latest_version }}"
+            echo "Manual run - using latest version: ${VERSION}"
+          else
+            VERSION="${{ github.event.inputs.version }}"
+            echo "Manual run - using specified version: ${VERSION}"
+          fi
+
+          echo "version=${VERSION}" >> $GITHUB_OUTPUT
+          echo "${VERSION}" > release-versions/n8n-latest.txt
 
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit_message: New auto release v${{steps.fetch-version.outputs.version}}
+          commit_message: "New release ${{ steps.determine-version.outputs.version }}"
