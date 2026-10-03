@@ -21,7 +21,7 @@ jobs:
       - name: Fetch release version
         id: fetch-version
         run: |
-          curl -sL https://raw.githubusercontent.com/n8n-io/n8n/master/package.json | jq -r ".version" > release-versions/n8n-latest.txt
+          curl -s https://api.github.com/repos/n8n-io/n8n/releases/latest | jq -r '.tag_name' | cut -d'@' -f2 > release-versions/n8n-latest.txt
           echo ::set-output name=version::$(cat release-versions/n8n-latest.txt)
 
       #      - name: Check for modified files
